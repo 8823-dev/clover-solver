@@ -34,7 +34,7 @@ body {
 
 .clover-board {
   position: relative;
-  width: min(88vw, 760px);
+  width: min(82vw, 620px);
   aspect-ratio: 1 / 1;
 }
 
@@ -50,9 +50,9 @@ body {
 
 .clover-board__input {
   position: absolute;
-  width: 17%;
+  width: 16%;
   min-width: 72px;
-  height: clamp(30px, 4.2vw, 42px);
+  height: clamp(28px, 3.6vw, 38px);
   transform: translate(-50%, -50%);
   border: 2px solid rgba(91, 132, 67, 0.45);
   border-radius: 8px;
@@ -111,7 +111,7 @@ body {
 
 @media (max-width: 640px) {
   .clover-board {
-    width: min(94vw, 560px);
+    width: min(92vw, 520px);
   }
 
   .clover-board__input {
