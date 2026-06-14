@@ -1,0 +1,11 @@
+.git
+.next
+node_modules
+coverage
+out
+build
+.DS_Store
+.env*
+AGENTS.md
+PROJECT_CONTEXT.md
+ARCHITECTURE.md

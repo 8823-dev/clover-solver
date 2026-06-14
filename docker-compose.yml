@@ -1,0 +1,16 @@
+services:
+  app:
+    build:
+      context: .
+      target: deps
+    command: yarn dev
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_TELEMETRY_DISABLED: "1"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+
+volumes:
+  node_modules:
