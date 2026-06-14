@@ -15,10 +15,11 @@ export function CloverBoard() {
   return (
     <section className="clover-board" aria-label="ことばのクローバー！ボード">
       <Image
-        src="/clover-board.png"
+        src="/clover-board-transparent.png"
         alt="ことばのクローバー！のクローバーボード"
         fill
         priority
+        unoptimized
         sizes="(max-width: 640px) 94vw, 760px"
         className="clover-board__image"
       />

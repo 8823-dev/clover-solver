@@ -71,41 +71,41 @@ body {
 
 .clover-board__input--top-left {
   top: 18.5%;
-  left: 37%;
+  left: 34%;
 }
 
 .clover-board__input--top-right {
   top: 18.5%;
-  left: 63%;
+  left: 66%;
 }
 
 .clover-board__input--right-top {
-  top: 38%;
+  top: 34%;
   left: 81.5%;
 }
 
 .clover-board__input--right-bottom {
-  top: 62%;
+  top: 66%;
   left: 81.5%;
 }
 
 .clover-board__input--bottom-right {
   top: 81.5%;
-  left: 63%;
+  left: 66%;
 }
 
 .clover-board__input--bottom-left {
   top: 81.5%;
-  left: 37%;
+  left: 34%;
 }
 
 .clover-board__input--left-bottom {
-  top: 62%;
+  top: 66%;
   left: 18.5%;
 }
 
 .clover-board__input--left-top {
-  top: 38%;
+  top: 34%;
   left: 18.5%;
 }
 
