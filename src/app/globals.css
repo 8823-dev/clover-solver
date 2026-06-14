@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --clover-page-background: #ead7b6;
+  --background: var(--clover-page-background);
   --foreground: #171717;
 }
 
@@ -12,13 +13,110 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--clover-page-background);
+    --foreground: #171717;
   }
+}
+
+html {
+  background-color: var(--clover-page-background);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, "Hiragino Sans", "Yu Gothic", sans-serif;
+}
+
+.clover-page {
+  background-color: var(--clover-page-background);
+}
+
+.clover-board {
+  position: relative;
+  width: min(82vw, 620px);
+  aspect-ratio: 1 / 1;
+}
+
+.clover-board__image {
+  position: absolute;
+  object-fit: contain;
+}
+
+.clover-board__form {
+  position: absolute;
+  inset: 0;
+}
+
+.clover-board__input {
+  position: absolute;
+  width: 16%;
+  min-width: 72px;
+  height: clamp(28px, 3.6vw, 38px);
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(91, 132, 67, 0.45);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #17210f;
+  font-size: clamp(12px, 1.6vw, 16px);
+  font-weight: 600;
+  text-align: center;
+  outline: none;
+}
+
+.clover-board__input:focus {
+  border-color: #4f8d35;
+  background: #ffffff;
+}
+
+.clover-board__input--top-left {
+  top: 18.5%;
+  left: 34%;
+}
+
+.clover-board__input--top-right {
+  top: 18.5%;
+  left: 66%;
+}
+
+.clover-board__input--right-top {
+  top: 34%;
+  left: 81.5%;
+}
+
+.clover-board__input--right-bottom {
+  top: 66%;
+  left: 81.5%;
+}
+
+.clover-board__input--bottom-right {
+  top: 81.5%;
+  left: 66%;
+}
+
+.clover-board__input--bottom-left {
+  top: 81.5%;
+  left: 34%;
+}
+
+.clover-board__input--left-bottom {
+  top: 66%;
+  left: 18.5%;
+}
+
+.clover-board__input--left-top {
+  top: 34%;
+  left: 18.5%;
+}
+
+@media (max-width: 640px) {
+  .clover-board {
+    width: min(92vw, 520px);
+  }
+
+  .clover-board__input {
+    min-width: 56px;
+    height: 28px;
+    border-radius: 6px;
+  }
 }
