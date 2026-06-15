@@ -41,16 +41,18 @@ export function GenerateAnswerPanel() {
         {isGenerating ? "生成中" : "回答を生成"}
       </button>
 
-      {isGenerating ? (
-        <div
-          className="generate-panel__status"
-          role="status"
-          aria-live="polite"
-        >
-          <span className="generate-panel__spinner" aria-hidden="true" />
-          回答を生成中
-        </div>
-      ) : null}
+      <div className="generate-panel__status" role="status" aria-live="polite">
+        {isGenerating ? (
+          <>
+            <span className="generate-panel__spinner" aria-hidden="true" />
+            回答を生成中
+          </>
+        ) : (
+          <span className="generate-panel__status-placeholder">
+            回答を生成中
+          </span>
+        )}
+      </div>
     </aside>
   );
 }
