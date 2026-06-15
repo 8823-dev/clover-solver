@@ -10,12 +10,11 @@ import { GenerateAnswerPanel } from "@/components/GenerateAnswerPanel";
 
 type WordValues = Record<WordSlotId, string>;
 
-const initialWordValues = wordSlotIds.reduce<WordValues>((values, id) => {
-  values[id] = "";
-  return values;
-}, {} as WordValues);
+const initialWordValues = Object.fromEntries(
+  wordSlotIds.map((id) => [id, ""]),
+) as WordValues;
 
-export function CloverSolver() {
+export const CloverSolver = () => {
   const [wordValues, setWordValues] = useState<WordValues>(initialWordValues);
 
   const hasMissingWords = wordSlotIds.some(
@@ -35,4 +34,4 @@ export function CloverSolver() {
       <GenerateAnswerPanel hasMissingWords={hasMissingWords} />
     </main>
   );
-}
+};

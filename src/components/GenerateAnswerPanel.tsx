@@ -6,9 +6,9 @@ type GenerateAnswerPanelProps = {
   hasMissingWords: boolean;
 };
 
-export function GenerateAnswerPanel({
+export const GenerateAnswerPanel = ({
   hasMissingWords,
-}: GenerateAnswerPanelProps) {
+}: GenerateAnswerPanelProps) => {
   const [theme, setTheme] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [showMissingWordsError, setShowMissingWordsError] = useState(false);
@@ -68,4 +68,4 @@ export function GenerateAnswerPanel({
       </div>
     </aside>
   );
-}
+};

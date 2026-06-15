@@ -20,7 +20,7 @@ type CloverBoardProps = {
   onWordChange: (id: WordSlotId, value: string) => void;
 };
 
-export function CloverBoard({ values, onWordChange }: CloverBoardProps) {
+export const CloverBoard = ({ values, onWordChange }: CloverBoardProps) => {
   return (
     <section className="clover-board" aria-label="ことばのクローバー！ボード">
       <Image
@@ -50,4 +50,4 @@ export function CloverBoard({ values, onWordChange }: CloverBoardProps) {
       </form>
     </section>
   );
-}
+};
