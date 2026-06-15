@@ -32,7 +32,7 @@ export const createOpenAICloverHintGeneratorFromEnv = (
   const apiKey = env.OPENAI_API_KEY?.trim();
 
   if (apiKey == null || apiKey.length === 0) {
-    throw new OpenAIConfigurationError("OPENAI_API_KEY is not set.");
+    throw new OpenAIConfigurationError("OPENAI_API_KEY が設定されていません。");
   }
 
   return new OpenAICloverHintGenerator({
@@ -51,7 +51,9 @@ export class OpenAICloverHintGenerator implements CloverHintGenerator {
     const apiKey = config.apiKey.trim();
 
     if (apiKey.length === 0) {
-      throw new OpenAIConfigurationError("OPENAI_API_KEY is not set.");
+      throw new OpenAIConfigurationError(
+        "OPENAI_API_KEY が設定されていません。",
+      );
     }
 
     this.apiKey = apiKey;
@@ -92,7 +94,7 @@ export class OpenAICloverHintGenerator implements CloverHintGenerator {
       });
     } catch {
       throw new OpenAIRequestError(
-        "OpenAI API request failed before receiving a response.",
+        "OpenAI API からレスポンスを受信する前にリクエストが失敗しました。",
       );
     }
   }
@@ -126,10 +128,10 @@ export class OpenAICloverHintGenerator implements CloverHintGenerator {
     const errorBody = await readErrorBody(response);
 
     if (errorBody == null) {
-      return `OpenAI API request failed with status ${response.status}.`;
+      return `OpenAI API リクエストが失敗しました。ステータス: ${response.status}`;
     }
 
-    return `OpenAI API request failed with status ${response.status}: ${errorBody}`;
+    return `OpenAI API リクエストが失敗しました。ステータス: ${response.status}、詳細: ${errorBody}`;
   }
 }
 
@@ -152,7 +154,9 @@ const parseResponseJson = async (response: Response): Promise<unknown> => {
   try {
     return await response.json();
   } catch {
-    throw new OpenAIResponseParseError("OpenAI response body is not valid JSON.");
+    throw new OpenAIResponseParseError(
+      "OpenAI API レスポンスの body が有効な JSON ではありません。",
+    );
   }
 };
 

@@ -26,15 +26,17 @@ export const parseCloverHintsFromOpenAIResponse = (
   } catch (error) {
     throw new OpenAIResponseParseError(
       error instanceof Error
-        ? `OpenAI response validation failed: ${error.message}`
-        : "OpenAI response validation failed.",
+        ? `OpenAI API レスポンスの検証に失敗しました: ${error.message}`
+        : "OpenAI API レスポンスの検証に失敗しました。",
     );
   }
 };
 
 const extractOutputText = (responseBody: unknown): string => {
   if (!isRecord(responseBody)) {
-    throw new OpenAIResponseParseError("OpenAI response body is not an object.");
+    throw new OpenAIResponseParseError(
+      "OpenAI API レスポンスの body がオブジェクトではありません。",
+    );
   }
 
   if (typeof responseBody.output_text === "string") {
@@ -44,7 +46,7 @@ const extractOutputText = (responseBody: unknown): string => {
   // Responses API の出力構造に備え、output 配列内の text も fallback として読む。
   if (!Array.isArray(responseBody.output)) {
     throw new OpenAIResponseParseError(
-      "OpenAI response does not include output text.",
+      "OpenAI API レスポンスに output text が含まれていません。",
     );
   }
 
@@ -53,7 +55,9 @@ const extractOutputText = (responseBody: unknown): string => {
     .join("");
 
   if (outputText.trim().length === 0) {
-    throw new OpenAIResponseParseError("OpenAI response text is empty.");
+    throw new OpenAIResponseParseError(
+      "OpenAI API レスポンスの text が空です。",
+    );
   }
 
   return outputText;
@@ -77,14 +81,16 @@ const parseJson = (value: string): unknown => {
   try {
     return JSON.parse(value);
   } catch {
-    throw new OpenAIResponseParseError("OpenAI response text is not valid JSON.");
+    throw new OpenAIResponseParseError(
+      "OpenAI API レスポンスの text が有効な JSON ではありません。",
+    );
   }
 };
 
 const parseHints = (value: unknown): CloverHints => {
   if (!isRecord(value) || !Array.isArray(value.hints)) {
     throw new OpenAIResponseParseError(
-      "OpenAI response JSON does not include hints.",
+      "OpenAI API レスポンスの JSON に hints が含まれていません。",
     );
   }
 
@@ -92,7 +98,7 @@ const parseHints = (value: unknown): CloverHints => {
 
   if (hints.length !== cloverSides.length) {
     throw new OpenAIResponseParseError(
-      "OpenAI response must include exactly 4 hints.",
+      "OpenAI API レスポンスの hints は 4 件である必要があります。",
     );
   }
 
@@ -113,7 +119,7 @@ const findHintBySide = (
 
   if (hint == null) {
     throw new OpenAIResponseParseError(
-      `OpenAI response is missing ${side} hint.`,
+      `OpenAI API レスポンスに ${side} の hint が含まれていません。`,
     );
   }
 
@@ -122,15 +128,21 @@ const findHintBySide = (
 
 const parseHint = (value: unknown): CloverHint => {
   if (!isRecord(value)) {
-    throw new OpenAIResponseParseError("OpenAI response hint is not an object.");
+    throw new OpenAIResponseParseError(
+      "OpenAI API レスポンスの hint がオブジェクトではありません。",
+    );
   }
 
   if (!isCloverSide(value.side)) {
-    throw new OpenAIResponseParseError("OpenAI response hint side is invalid.");
+    throw new OpenAIResponseParseError(
+      "OpenAI API レスポンスの hint side が不正です。",
+    );
   }
 
   if (typeof value.text !== "string") {
-    throw new OpenAIResponseParseError("OpenAI response hint text is invalid.");
+    throw new OpenAIResponseParseError(
+      "OpenAI API レスポンスの hint text が不正です。",
+    );
   }
 
   return {

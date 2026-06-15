@@ -64,9 +64,8 @@ const normalizeRequiredText = (value: string, fieldName: string): string => {
   const normalizedValue = value.trim();
 
   if (normalizedValue.length === 0) {
-    throw new CloverHintValidationError(`${fieldName} is required.`);
+    throw new CloverHintValidationError(`${fieldName} は必須です。`);
   }
 
   return normalizedValue;
 };
-
