@@ -2,15 +2,30 @@
 
 import { useState } from "react";
 
-export function GenerateAnswerPanel() {
+type GenerateAnswerPanelProps = {
+  hasMissingWords: boolean;
+};
+
+export function GenerateAnswerPanel({
+  hasMissingWords,
+}: GenerateAnswerPanelProps) {
   const [theme, setTheme] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
+  const [showMissingWordsError, setShowMissingWordsError] = useState(false);
+
+  const shouldShowMissingWordsError = showMissingWordsError && hasMissingWords;
 
   const handleGenerate = async () => {
     if (isGenerating) {
       return;
     }
 
+    if (hasMissingWords) {
+      setShowMissingWordsError(true);
+      return;
+    }
+
+    setShowMissingWordsError(false);
     setIsGenerating(true);
     await new Promise((resolve) => setTimeout(resolve, 1200));
     setIsGenerating(false);
@@ -47,6 +62,8 @@ export function GenerateAnswerPanel() {
             <span className="generate-panel__spinner" aria-hidden="true" />
             回答を生成中
           </>
+        ) : shouldShowMissingWordsError ? (
+          <span className="generate-panel__error">未入力の単語があります</span>
         ) : null}
       </div>
     </aside>

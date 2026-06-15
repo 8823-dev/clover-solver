@@ -9,9 +9,18 @@ const wordSlots = [
   { id: "bottom-left", className: "clover-board__input--bottom-left" },
   { id: "left-bottom", className: "clover-board__input--left-bottom" },
   { id: "left-top", className: "clover-board__input--left-top" },
-];
+] as const;
 
-export function CloverBoard() {
+export type WordSlotId = (typeof wordSlots)[number]["id"];
+
+export const wordSlotIds = wordSlots.map((slot) => slot.id);
+
+type CloverBoardProps = {
+  values: Record<WordSlotId, string>;
+  onWordChange: (id: WordSlotId, value: string) => void;
+};
+
+export function CloverBoard({ values, onWordChange }: CloverBoardProps) {
   return (
     <section className="clover-board" aria-label="ことばのクローバー！ボード">
       <Image
@@ -31,6 +40,9 @@ export function CloverBoard() {
             className={`clover-board__input ${slot.className}`}
             name={slot.id}
             type="text"
+            required
+            value={values[slot.id]}
+            onChange={(event) => onWordChange(slot.id, event.target.value)}
             placeholder={`単語 ${index + 1}`}
             aria-label={`単語 ${index + 1}`}
           />
