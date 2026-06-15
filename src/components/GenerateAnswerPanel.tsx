@@ -47,11 +47,7 @@ export function GenerateAnswerPanel() {
             <span className="generate-panel__spinner" aria-hidden="true" />
             回答を生成中
           </>
-        ) : (
-          <span className="generate-panel__status-placeholder">
-            回答を生成中
-          </span>
-        )}
+        ) : null}
       </div>
     </aside>
   );

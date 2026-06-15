@@ -144,10 +144,6 @@ body {
   font-weight: 700;
 }
 
-.generate-panel__status-placeholder {
-  visibility: hidden;
-}
-
 .generate-panel__spinner {
   width: 16px;
   aspect-ratio: 1 / 1;
