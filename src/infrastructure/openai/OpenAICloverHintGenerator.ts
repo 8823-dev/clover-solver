@@ -28,6 +28,7 @@ type OpenAICloverHintGeneratorConfig = {
 export const createOpenAICloverHintGeneratorFromEnv = (
   env: NodeJS.ProcessEnv = process.env,
 ): OpenAICloverHintGenerator => {
+  // API key は server 側の環境変数からのみ読み取り、呼び出し元へ露出させない。
   const apiKey = env.OPENAI_API_KEY?.trim();
 
   if (apiKey == null || apiKey.length === 0) {
@@ -80,6 +81,7 @@ export class OpenAICloverHintGenerator implements CloverHintGenerator {
     request: CloverHintGenerationRequest,
   ): Promise<Response> {
     try {
+      // OpenAI への通信は infrastructure 層に閉じ込め、usecase 層へ API 仕様を漏らさない。
       return await this.fetcher(this.endpoint, {
         method: "POST",
         headers: {
@@ -96,6 +98,7 @@ export class OpenAICloverHintGenerator implements CloverHintGenerator {
   }
 
   private createRequestBody(request: CloverHintGenerationRequest) {
+    // Structured Outputs を使い、OpenAI から返る JSON の形を固定する。
     return {
       model: this.model,
       input: [

@@ -14,6 +14,7 @@ type ParsedCloverHintsResponse = {
 export const parseCloverHintsFromOpenAIResponse = (
   responseBody: unknown,
 ): ParsedCloverHintsResponse => {
+  // OpenAI の raw response は unknown として受け、型を確認しながらドメイン型へ変換する。
   const outputText = extractOutputText(responseBody);
   const parsedJson = parseJson(outputText);
   const hints = parseHints(parsedJson);
@@ -40,6 +41,7 @@ const extractOutputText = (responseBody: unknown): string => {
     return responseBody.output_text;
   }
 
+  // Responses API の出力構造に備え、output 配列内の text も fallback として読む。
   if (!Array.isArray(responseBody.output)) {
     throw new OpenAIResponseParseError(
       "OpenAI response does not include output text.",
@@ -94,6 +96,7 @@ const parseHints = (value: unknown): CloverHints => {
     );
   }
 
+  // 後続処理で扱いやすいよう、回答はボードの辺順に並べ直す。
   return [
     findHintBySide(hints, "top"),
     findHintBySide(hints, "right"),
