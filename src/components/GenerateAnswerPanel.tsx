@@ -20,7 +20,7 @@ export function GenerateAnswerPanel() {
     <aside className="generate-panel" aria-label="回答生成">
       <div className="generate-panel__options">
         <label className="generate-panel__label" htmlFor="theme">
-          テーマを指定
+          テーマを指定（任意）
         </label>
         <input
           id="theme"
@@ -28,7 +28,7 @@ export function GenerateAnswerPanel() {
           type="text"
           value={theme}
           onChange={(event) => setTheme(event.target.value)}
-          placeholder="例: 食べ物、旅行"
+          placeholder="例: 倫理違反、アニメ"
         />
       </div>
 
