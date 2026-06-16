@@ -7,6 +7,11 @@ import {
   wordSlotIds,
 } from "@/components/CloverBoard";
 import { GenerateAnswerPanel } from "@/components/GenerateAnswerPanel";
+import type {
+  GenerateAnswersRequest,
+  GenerateAnswersResponse,
+  GenerateAnswersSuccessResponse,
+} from "@/shared/api/generateAnswers";
 
 type WordValues = Record<WordSlotId, string>;
 
@@ -16,6 +21,12 @@ const initialWordValues = Object.fromEntries(
 
 export const CloverSolver = () => {
   const [wordValues, setWordValues] = useState<WordValues>(initialWordValues);
+  const [, setGeneratedHints] =
+    useState<GenerateAnswersSuccessResponse["hints"] | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [generationErrorMessage, setGenerationErrorMessage] = useState<
+    string | null
+  >(null);
 
   const hasMissingWords = wordSlotIds.some(
     (id) => wordValues[id].trim().length === 0,
@@ -26,12 +37,74 @@ export const CloverSolver = () => {
       ...currentValues,
       [id]: value,
     }));
+    setGenerationErrorMessage(null);
+  };
+
+  const handleGenerateAnswers = async (theme: string) => {
+    setIsGenerating(true);
+    setGenerationErrorMessage(null);
+
+    try {
+      const response = await fetch("/api/generate-answers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(createGenerateAnswersRequest(wordValues, theme)),
+      });
+      const responseBody = (await response.json()) as GenerateAnswersResponse;
+
+      if (!response.ok || "error" in responseBody) {
+        setGenerationErrorMessage(
+          "error" in responseBody
+            ? responseBody.error.message
+            : "回答生成に失敗しました。",
+        );
+        return;
+      }
+
+      setGeneratedHints(responseBody.hints);
+    } catch {
+      setGenerationErrorMessage("回答生成に失敗しました。");
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   return (
     <main className="solver-layout mx-auto min-h-[calc(100vh-2rem)] w-full max-w-6xl">
       <CloverBoard values={wordValues} onWordChange={handleWordChange} />
-      <GenerateAnswerPanel hasMissingWords={hasMissingWords} />
+      <GenerateAnswerPanel
+        errorMessage={generationErrorMessage}
+        hasMissingWords={hasMissingWords}
+        isGenerating={isGenerating}
+        onGenerate={handleGenerateAnswers}
+      />
     </main>
   );
 };
+
+const createGenerateAnswersRequest = (
+  wordValues: WordValues,
+  theme: string,
+): GenerateAnswersRequest => ({
+  pairs: [
+    {
+      side: "top",
+      words: [wordValues["top-left"], wordValues["top-right"]],
+    },
+    {
+      side: "right",
+      words: [wordValues["right-top"], wordValues["right-bottom"]],
+    },
+    {
+      side: "bottom",
+      words: [wordValues["bottom-right"], wordValues["bottom-left"]],
+    },
+    {
+      side: "left",
+      words: [wordValues["left-bottom"], wordValues["left-top"]],
+    },
+  ],
+  theme,
+});
