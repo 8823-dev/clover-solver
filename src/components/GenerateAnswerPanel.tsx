@@ -3,14 +3,19 @@
 import { useState } from "react";
 
 type GenerateAnswerPanelProps = {
+  errorMessage: string | null;
   hasMissingWords: boolean;
+  isGenerating: boolean;
+  onGenerate: (theme: string) => Promise<void>;
 };
 
 export const GenerateAnswerPanel = ({
+  errorMessage,
   hasMissingWords,
+  isGenerating,
+  onGenerate,
 }: GenerateAnswerPanelProps) => {
   const [theme, setTheme] = useState("");
-  const [isGenerating, setIsGenerating] = useState(false);
   const [showMissingWordsError, setShowMissingWordsError] = useState(false);
 
   const shouldShowMissingWordsError = showMissingWordsError && hasMissingWords;
@@ -26,9 +31,7 @@ export const GenerateAnswerPanel = ({
     }
 
     setShowMissingWordsError(false);
-    setIsGenerating(true);
-    await new Promise((resolve) => setTimeout(resolve, 1200));
-    setIsGenerating(false);
+    await onGenerate(theme);
   };
 
   return (
@@ -64,6 +67,8 @@ export const GenerateAnswerPanel = ({
           </>
         ) : shouldShowMissingWordsError ? (
           <span className="generate-panel__error">未入力の単語があります</span>
+        ) : errorMessage != null ? (
+          <span className="generate-panel__error">{errorMessage}</span>
         ) : null}
       </div>
     </aside>
