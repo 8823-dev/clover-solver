@@ -16,7 +16,7 @@ import { parseCloverHintsFromOpenAIResponse } from "./response";
 import { cloverHintsJsonSchema } from "./schema";
 
 const openAIResponsesEndpoint = "https://api.openai.com/v1/responses";
-const defaultOpenAIModel = "gpt-4.1-mini";
+const defaultOpenAIModel = "gpt-5.4-mini";
 
 type OpenAICloverHintGeneratorConfig = {
   readonly apiKey: string;
