@@ -6,6 +6,7 @@
     sans-serif;
   --clover-ink-rgb: 23, 33, 15;
   --clover-ink: rgb(var(--clover-ink-rgb));
+  --clover-ink-muted: rgba(var(--clover-ink-rgb), 0.8);
   --background: var(--clover-page-background);
   --foreground: var(--clover-ink);
 }
@@ -147,6 +148,7 @@ body {
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.82);
   cursor: pointer;
+  opacity: 0.8;
   padding: 6px;
 }
 
@@ -185,7 +187,7 @@ body {
 }
 
 .generate-panel__label {
-  color: var(--clover-ink);
+  color: var(--clover-ink-muted);
   font-size: 17.5px;
   font-weight: 700;
 }
