@@ -29,13 +29,17 @@ const hintSlots = [
 
 type CloverBoardProps = {
   hints: CloverHints | null;
+  isResetDisabled: boolean;
   values: Record<WordSlotId, string>;
+  onReset: () => void;
   onWordChange: (id: WordSlotId, value: string) => void;
 };
 
 export const CloverBoard = ({
   hints,
+  isResetDisabled,
   values,
+  onReset,
   onWordChange,
 }: CloverBoardProps) => {
   return (
@@ -81,6 +85,23 @@ export const CloverBoard = ({
           );
         })}
       </div>
+
+      <button
+        className="clover-board__reset-button"
+        type="button"
+        disabled={isResetDisabled}
+        onClick={onReset}
+        aria-label="単語と生成した回答を初期化"
+      >
+        <Image
+          src="/refresh.png"
+          alt=""
+          width={96}
+          height={96}
+          unoptimized
+          className="clover-board__reset-icon"
+        />
+      </button>
     </section>
   );
 };

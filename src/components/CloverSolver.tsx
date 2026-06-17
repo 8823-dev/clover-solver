@@ -43,6 +43,20 @@ export const CloverSolver = () => {
     setGeneratedHints(null);
   };
 
+  const handleResetBoard = () => {
+    const shouldReset = window.confirm(
+      "入力した単語と生成した回答を初期化しますか？",
+    );
+
+    if (!shouldReset) {
+      return;
+    }
+
+    setWordValues(initialWordValues);
+    setGeneratedHints(null);
+    setGenerationErrorMessage(null);
+  };
+
   const handleGenerateAnswers = async (theme: string) => {
     setIsGenerating(true);
     setGenerationErrorMessage(null);
@@ -74,7 +88,9 @@ export const CloverSolver = () => {
     <main className="solver-layout mx-auto min-h-[calc(100vh-2rem)] w-full max-w-6xl">
       <CloverBoard
         hints={generatedHints}
+        isResetDisabled={isGenerating}
         values={wordValues}
+        onReset={handleResetBoard}
         onWordChange={handleWordChange}
       />
       <GenerateAnswerPanel
