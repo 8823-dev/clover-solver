@@ -91,7 +91,7 @@ export const CloverBoard = ({
         type="button"
         disabled={isResetDisabled}
         onClick={onReset}
-        aria-label="お題と生成した回答を初期化"
+        aria-label="単語と生成した回答を初期化"
       >
         <Image
           src="/refresh.png"

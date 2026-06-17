@@ -45,7 +45,7 @@ export const CloverSolver = () => {
 
   const handleResetBoard = () => {
     const shouldReset = window.confirm(
-      "入力したお題と生成した回答を初期化しますか？",
+      "入力した単語と生成した回答を初期化しますか？",
     );
 
     if (!shouldReset) {
