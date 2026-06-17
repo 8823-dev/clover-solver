@@ -225,7 +225,8 @@ body {
 
 .generate-panel__status {
   display: flex;
-  min-height: 24px;
+  height: 28px;
+  flex: 0 0 28px;
   align-items: center;
   justify-content: center;
   gap: 8px;
