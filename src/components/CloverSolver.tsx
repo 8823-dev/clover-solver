@@ -23,7 +23,7 @@ const generateAnswersErrorMessage = "回答生成に失敗しました";
 
 export const CloverSolver = () => {
   const [wordValues, setWordValues] = useState<WordValues>(initialWordValues);
-  const [, setGeneratedHints] =
+  const [generatedHints, setGeneratedHints] =
     useState<GenerateAnswersSuccessResponse["hints"] | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationErrorMessage, setGenerationErrorMessage] = useState<
@@ -40,6 +40,7 @@ export const CloverSolver = () => {
       [id]: value,
     }));
     setGenerationErrorMessage(null);
+    setGeneratedHints(null);
   };
 
   const handleGenerateAnswers = async (theme: string) => {
@@ -71,7 +72,11 @@ export const CloverSolver = () => {
 
   return (
     <main className="solver-layout mx-auto min-h-[calc(100vh-2rem)] w-full max-w-6xl">
-      <CloverBoard values={wordValues} onWordChange={handleWordChange} />
+      <CloverBoard
+        hints={generatedHints}
+        values={wordValues}
+        onWordChange={handleWordChange}
+      />
       <GenerateAnswerPanel
         errorMessage={generationErrorMessage}
         hasMissingWords={hasMissingWords}

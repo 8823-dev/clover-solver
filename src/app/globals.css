@@ -56,6 +56,46 @@ body {
   inset: 0;
 }
 
+.clover-board__hints {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.clover-board__hint {
+  position: absolute;
+  display: flex;
+  width: 22%;
+  min-height: clamp(30px, 4vw, 44px);
+  max-height: clamp(42px, 5vw, 56px);
+  transform: translate(-50%, -50%);
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 2px solid rgba(91, 132, 67, 0.5);
+  border-radius: 8px;
+  background: rgba(255, 251, 239, 0.92);
+  color: #294420;
+  font-size: clamp(12px, 1.7vw, 16px);
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  padding: 5px 8px;
+  text-align: center;
+}
+
+.clover-board__hint-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.clover-board__hint:has(.clover-board__hint-text:empty) {
+  border-color: transparent;
+  background: transparent;
+}
+
 .clover-board__input {
   position: absolute;
   width: 16%;
@@ -203,6 +243,26 @@ body {
   left: 18.5%;
 }
 
+.clover-board__hint--top {
+  top: 9%;
+  left: 50%;
+}
+
+.clover-board__hint--right {
+  top: 50%;
+  left: 91%;
+}
+
+.clover-board__hint--bottom {
+  top: 91%;
+  left: 50%;
+}
+
+.clover-board__hint--left {
+  top: 50%;
+  left: 9%;
+}
+
 @media (max-width: 900px) {
   .solver-layout {
     flex-direction: column;
@@ -218,6 +278,15 @@ body {
     min-width: 56px;
     height: 28px;
     border-radius: 6px;
+  }
+
+  .clover-board__hint {
+    width: 24%;
+    min-height: 28px;
+    max-height: 44px;
+    border-radius: 6px;
+    font-size: 12px;
+    padding: 4px 6px;
   }
 
   .generate-panel {
