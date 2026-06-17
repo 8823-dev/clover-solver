@@ -136,13 +136,12 @@ body {
 
 .clover-board__reset-button {
   position: absolute;
-  top: 76%;
-  left: 76%;
+  right: 0;
+  bottom: 0;
   z-index: 2;
   display: grid;
   width: clamp(34px, 6vw, 48px);
   aspect-ratio: 1 / 1;
-  transform: translate(-50%, -50%);
   place-items: center;
   border: 0;
   border-radius: 9999px;
@@ -339,8 +338,8 @@ body {
   }
 
   .clover-board__reset-button {
-    top: 76%;
-    left: 76%;
+    right: 0;
+    bottom: 0;
     width: 34px;
     padding: 5px;
   }
