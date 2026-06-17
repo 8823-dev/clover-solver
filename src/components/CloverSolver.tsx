@@ -19,6 +19,8 @@ const initialWordValues = Object.fromEntries(
   wordSlotIds.map((id) => [id, ""]),
 ) as WordValues;
 
+const generateAnswersErrorMessage = "回答生成に失敗しました";
+
 export const CloverSolver = () => {
   const [wordValues, setWordValues] = useState<WordValues>(initialWordValues);
   const [, setGeneratedHints] =
@@ -55,17 +57,13 @@ export const CloverSolver = () => {
       const responseBody = (await response.json()) as GenerateAnswersResponse;
 
       if (!response.ok || "error" in responseBody) {
-        setGenerationErrorMessage(
-          "error" in responseBody
-            ? responseBody.error.message
-            : "回答生成に失敗しました。",
-        );
+        setGenerationErrorMessage(generateAnswersErrorMessage);
         return;
       }
 
       setGeneratedHints(responseBody.hints);
     } catch {
-      setGenerationErrorMessage("回答生成に失敗しました。");
+      setGenerationErrorMessage(generateAnswersErrorMessage);
     } finally {
       setIsGenerating(false);
     }
