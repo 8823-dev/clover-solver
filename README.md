@@ -25,7 +25,7 @@ cp .env.example .env.local
 
 ```env
 OPENAI_API_KEY=your_openai_api_key
-OPENAI_MODEL=gpt-4.1-mini
+OPENAI_MODEL=gpt-5.4-mini
 ```
 
 `OPENAI_MODEL` は省略可能です。
