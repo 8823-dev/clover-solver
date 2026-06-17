@@ -139,8 +139,8 @@ body {
 
 .generate-panel {
   display: flex;
-  width: min(100%, 240px);
-  flex: 0 0 240px;
+  width: min(100%, 360px);
+  flex: 0 0 360px;
   flex-direction: column;
   gap: 14px;
 }
