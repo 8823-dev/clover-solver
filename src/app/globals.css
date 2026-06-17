@@ -4,8 +4,10 @@
   --clover-page-background: #ead7b6;
   --clover-font-family: var(--font-uzura), "Hiragino Sans", "Yu Gothic",
     sans-serif;
+  --clover-ink-rgb: 23, 33, 15;
+  --clover-ink: rgb(var(--clover-ink-rgb));
   --background: var(--clover-page-background);
-  --foreground: #171717;
+  --foreground: var(--clover-ink);
 }
 
 @theme inline {
@@ -16,7 +18,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: var(--clover-page-background);
-    --foreground: #171717;
+    --foreground: var(--clover-ink);
   }
 }
 
@@ -85,22 +87,21 @@ body {
 .clover-board__hint {
   position: absolute;
   display: flex;
-  width: 22%;
+  width: 24%;
   min-height: clamp(30px, 4vw, 44px);
   max-height: clamp(42px, 5vw, 56px);
   transform: translate(-50%, -50%);
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border: 2px solid rgba(91, 132, 67, 0.5);
-  border-radius: 8px;
-  background: rgba(255, 251, 239, 0.92);
-  color: #294420;
-  font-size: clamp(15px, 2.125vw, 20px);
+  border: 0;
+  background: transparent;
+  color: var(--clover-ink);
+  font-size: clamp(17.5px, 2.5vw, 22.5px);
   font-weight: 700;
   line-height: 1.25;
   overflow-wrap: anywhere;
-  padding: 5px 8px;
+  padding: 0;
   text-align: center;
 }
 
@@ -109,11 +110,6 @@ body {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
-}
-
-.clover-board__hint:has(.clover-board__hint-text:empty) {
-  border-color: transparent;
-  background: transparent;
 }
 
 .clover-board__input {
@@ -125,7 +121,7 @@ body {
   border: 2px solid rgba(91, 132, 67, 0.45);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.88);
-  color: #17210f;
+  color: var(--clover-ink);
   font-size: clamp(15px, 2vw, 20px);
   font-weight: 600;
   text-align: center;
@@ -156,7 +152,7 @@ body {
 }
 
 .generate-panel__label {
-  color: #35552b;
+  color: var(--clover-ink);
   font-size: 17.5px;
   font-weight: 700;
 }
@@ -166,7 +162,7 @@ body {
   border: 2px solid rgba(91, 132, 67, 0.4);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.9);
-  color: #17210f;
+  color: var(--clover-ink);
   font-size: 18.75px;
   outline: none;
   padding: 0 12px;
@@ -301,12 +297,10 @@ body {
   }
 
   .clover-board__hint {
-    width: 24%;
+    width: 26%;
     min-height: 28px;
     max-height: 44px;
-    border-radius: 6px;
-    font-size: 15px;
-    padding: 4px 6px;
+    font-size: 16.25px;
   }
 
   .generate-panel {
