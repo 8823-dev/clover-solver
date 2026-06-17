@@ -98,7 +98,7 @@ body {
   border: 0;
   background: transparent;
   color: var(--clover-ink);
-  font-size: clamp(17.5px, 2.5vw, 22.5px);
+  font-size: clamp(20px, 3vw, 30px);
   font-weight: 700;
   line-height: 1.25;
   overflow-wrap: anywhere;
@@ -115,7 +115,7 @@ body {
 
 .clover-board__input {
   position: absolute;
-  width: 16%;
+  width: 20%;
   min-width: 72px;
   height: clamp(28px, 3.6vw, 38px);
   transform: translate(-50%, -50%);

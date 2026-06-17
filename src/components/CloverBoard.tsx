@@ -55,19 +55,25 @@ export const CloverBoard = ({
       />
 
       <form className="clover-board__form" aria-label="キーワード入力">
-        {wordSlots.map((slot, index) => (
-          <input
-            key={slot.id}
-            className={`clover-board__input ${slot.className}`}
-            name={slot.id}
-            type="text"
-            required
-            value={values[slot.id]}
-            onChange={(event) => onWordChange(slot.id, event.target.value)}
-            placeholder={`単語 ${index + 1}`}
-            aria-label={`単語 ${index + 1}`}
-          />
-        ))}
+        {wordSlots.map((slot, index) => {
+          const value = values[slot.id];
+          const fontSize = getWordInputFontSize(value);
+
+          return (
+            <input
+              key={slot.id}
+              className={`clover-board__input ${slot.className}`}
+              name={slot.id}
+              type="text"
+              required
+              style={{ fontSize }}
+              value={value}
+              onChange={(event) => onWordChange(slot.id, event.target.value)}
+              placeholder={`単語 ${index + 1}`}
+              aria-label={`単語 ${index + 1}`}
+            />
+          );
+        })}
       </form>
 
       <div className="clover-board__hints" aria-label="生成された回答">
@@ -110,3 +116,25 @@ const findHintText = (
   hints: readonly CloverHint[] | null,
   side: CloverSide,
 ): string => hints?.find((hint) => hint.side === side)?.text ?? "";
+
+const getWordInputFontSize = (value: string): string => {
+  const wordLength = Array.from(value.trim()).length;
+
+  if (wordLength >= 12) {
+    return "clamp(8px, 1vw, 9px)";
+  }
+
+  if (wordLength >= 10) {
+    return "clamp(9px, 1.25vw, 11px)";
+  }
+
+  if (wordLength >= 8) {
+    return "clamp(11px, 1.45vw, 13px)";
+  }
+
+  if (wordLength >= 6) {
+    return "clamp(13px, 1.65vw, 16px)";
+  }
+
+  return "clamp(15px, 2vw, 20px)";
+};
