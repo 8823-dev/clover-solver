@@ -70,3 +70,8 @@ yarn lint
 yarn test
 yarn build
 ```
+
+## フォント
+
+このアプリでは、うずらフォントを使用しています。
+配布元は http://azukifont.com/ です。
