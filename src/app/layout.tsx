@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { FontLoadingOverlay } from "@/components/FontLoadingOverlay";
+import { LoadingOverlay } from "@/components/LoadingOverlay";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ const RootLayout = ({
   return (
     <html lang="ja" className={`${uzura.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <FontLoadingOverlay />
+        <LoadingOverlay />
         {children}
       </body>
     </html>
