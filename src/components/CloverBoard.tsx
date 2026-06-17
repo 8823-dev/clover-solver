@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CloverHint, CloverHints, CloverSide } from "@/domain/clover";
 
 const wordSlots = [
   { id: "top-left", className: "clover-board__input--top-left" },
@@ -15,12 +16,28 @@ export type WordSlotId = (typeof wordSlots)[number]["id"];
 
 export const wordSlotIds = wordSlots.map((slot) => slot.id);
 
+const hintSlots = [
+  { side: "top", label: "上", className: "clover-board__hint--top" },
+  { side: "right", label: "右", className: "clover-board__hint--right" },
+  { side: "bottom", label: "下", className: "clover-board__hint--bottom" },
+  { side: "left", label: "左", className: "clover-board__hint--left" },
+] as const satisfies readonly {
+  readonly side: CloverSide;
+  readonly label: string;
+  readonly className: string;
+}[];
+
 type CloverBoardProps = {
+  hints: CloverHints | null;
   values: Record<WordSlotId, string>;
   onWordChange: (id: WordSlotId, value: string) => void;
 };
 
-export const CloverBoard = ({ values, onWordChange }: CloverBoardProps) => {
+export const CloverBoard = ({
+  hints,
+  values,
+  onWordChange,
+}: CloverBoardProps) => {
   return (
     <section className="clover-board" aria-label="ことばのクローバー！ボード">
       <Image
@@ -48,6 +65,27 @@ export const CloverBoard = ({ values, onWordChange }: CloverBoardProps) => {
           />
         ))}
       </form>
+
+      <div className="clover-board__hints" aria-label="生成された回答">
+        {hintSlots.map((slot) => {
+          const hintText = findHintText(hints, slot.side);
+
+          return (
+            <output
+              key={slot.side}
+              className={`clover-board__hint ${slot.className}`}
+              aria-label={`${slot.label}の回答`}
+            >
+              <span className="clover-board__hint-text">{hintText}</span>
+            </output>
+          );
+        })}
+      </div>
     </section>
   );
 };
+
+const findHintText = (
+  hints: readonly CloverHint[] | null,
+  side: CloverSide,
+): string => hints?.find((hint) => hint.side === side)?.text ?? "";
