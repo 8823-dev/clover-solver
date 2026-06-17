@@ -1,14 +1,9 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Uzura";
-  src: url("/fonts/uzura.ttf") format("truetype");
-  font-display: swap;
-}
-
 :root {
   --clover-page-background: #ead7b6;
-  --clover-font-family: "Uzura", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --clover-font-family: var(--font-uzura), "Hiragino Sans", "Yu Gothic",
+    sans-serif;
   --background: var(--clover-page-background);
   --foreground: #171717;
 }
@@ -83,7 +78,7 @@ body {
   border-radius: 8px;
   background: rgba(255, 251, 239, 0.92);
   color: #294420;
-  font-size: clamp(12px, 1.7vw, 16px);
+  font-size: clamp(15px, 2.125vw, 20px);
   font-weight: 700;
   line-height: 1.25;
   overflow-wrap: anywhere;
@@ -113,7 +108,7 @@ body {
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.88);
   color: #17210f;
-  font-size: clamp(12px, 1.6vw, 16px);
+  font-size: clamp(15px, 2vw, 20px);
   font-weight: 600;
   text-align: center;
   outline: none;
@@ -144,7 +139,7 @@ body {
 
 .generate-panel__label {
   color: #35552b;
-  font-size: 14px;
+  font-size: 17.5px;
   font-weight: 700;
 }
 
@@ -154,7 +149,7 @@ body {
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.9);
   color: #17210f;
-  font-size: 15px;
+  font-size: 18.75px;
   outline: none;
   padding: 0 12px;
 }
@@ -171,7 +166,7 @@ body {
   background: #6fa84d;
   color: #ffffff;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
 }
 
@@ -187,7 +182,7 @@ body {
   justify-content: center;
   gap: 8px;
   color: #35552b;
-  font-size: 14px;
+  font-size: 17.5px;
   font-weight: 700;
 }
 
@@ -292,7 +287,7 @@ body {
     min-height: 28px;
     max-height: 44px;
     border-radius: 6px;
-    font-size: 12px;
+    font-size: 15px;
     padding: 4px 6px;
   }
 
